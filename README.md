@@ -6,7 +6,11 @@
 * Oauth
 * Team membership
 
-A new Flutter project.
+
+## iOS
+
+- FlutterDeepLinkingEnabled to true in Info
+- need to add URL types
 
 ## Getting Started
 

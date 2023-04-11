@@ -1,5 +1,6 @@
 import Cocoa
 import FlutterMacOS
+import SwiftUI
 
 @NSApplicationMain
 class AppDelegate: FlutterAppDelegate {

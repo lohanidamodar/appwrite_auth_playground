@@ -13,7 +13,10 @@ final client = Client(
     .setProject('authplayground');
 final account = Account(client);
 
-final router = GoRouter(routes: [
+final router = GoRouter(
+  debugLogDiagnostics: true,
+  
+  routes: [
   GoRoute(
     path: '/',
     builder: (context, state) {
