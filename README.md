@@ -1,5 +1,11 @@
 # appwrite_auth_playground
 
+* Magic URL
+* Recover Password
+* Verify email
+* Oauth
+* Team membership
+
 A new Flutter project.
 
 ## Getting Started

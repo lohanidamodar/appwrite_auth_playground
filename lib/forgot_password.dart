@@ -1,4 +1,5 @@
 import 'package:appwrite/appwrite.dart';
+import 'package:appwrite_auth_playground/form_view.dart';
 import 'package:appwrite_auth_playground/login.dart';
 import 'package:flutter/material.dart';
 
@@ -11,11 +12,10 @@ class ForgotPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Forgot Password'),
+        title: const Text('Forgot Password'),
       ),
-      body: LoginView(
-        type: LoginViewType.magicUrl,
-        onLogin: (email) async {
+      body: FormView(
+        onSubmit: (email, {password, confirmPassword}) async {
           await account.createRecovery(
             email: email,
             url:

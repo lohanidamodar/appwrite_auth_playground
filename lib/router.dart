@@ -1,4 +1,5 @@
 import 'package:appwrite/appwrite.dart';
+import 'package:appwrite_auth_playground/recover.dart';
 import 'package:go_router/go_router.dart';
 
 import 'confirm_login.dart';
@@ -16,7 +17,6 @@ final router = GoRouter(routes: [
   GoRoute(
     path: '/',
     builder: (context, state) {
-      print(state.queryParams);
       return const HomePage(title: 'Appwrite Authentication playground');
     },
     routes: [
@@ -34,7 +34,11 @@ final router = GoRouter(routes: [
         path: 'recovery',
         builder: (context, state) {
           print(state.queryParams);
-          return HomePage(title: 'Recover');
+          return RecoverPassword(
+            account: account,
+            userId: state.queryParams['userId'] ?? '',
+            secret: state.queryParams['secret'] ?? '',
+          );
         },
       ),
       GoRoute(
