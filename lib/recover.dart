@@ -19,18 +19,18 @@ class RecoverPassword extends StatelessWidget {
         title: Text('Recover Password'),
       ),
       body: FormView(
+        buttonLabel: "Set Password",
         showPassword: true,
         showConfirmPassword: true,
         showEmail: false,
-        onSubmit: (email, {confirmPassword, password}) async {
-          print(confirmPassword);
-          print(password);
+        onSubmit: (email, {confirmPassword, password, name}) async {
           await account.updateRecovery(
             userId: userId,
             secret: secret,
             password: password!,
             passwordAgain: confirmPassword!,
           );
+          return true;
           print('password recovered');
         },
       ),

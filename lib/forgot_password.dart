@@ -15,13 +15,15 @@ class ForgotPassword extends StatelessWidget {
         title: const Text('Forgot Password'),
       ),
       body: FormView(
-        onSubmit: (email, {password, confirmPassword}) async {
+        buttonLabel: "Recover",
+        onSubmit: (email, {password, confirmPassword, name}) async {
           await account.createRecovery(
             email: email,
             url:
                 'appwrite-callback-auth-authplayground://popupbits.com/recovery',
           );
           print('email sent');
+          return true;
         },
       ),
     );

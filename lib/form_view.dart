@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 
+typedef OnFormSubmit = Future<bool> Function(String email,
+    {String? name, String? password, String? confirmPassword});
+
 class FormView extends StatefulWidget {
   final bool showEmail;
   final bool showPassword;
   final bool showConfirmPassword;
+  final String buttonLabel;
+  final bool showName;
+  final List<Widget>? children;
 
-  final Function(String email, {String? password, String? confirmPassword})
-      onSubmit;
+  final OnFormSubmit onSubmit;
   const FormView({
     Key? key,
+    required this.onSubmit,
+    required this.buttonLabel,
     this.showEmail = true,
     this.showPassword = false,
     this.showConfirmPassword = false,
-    required this.onSubmit,
+    this.showName = false,
+    this.children,
   }) : super(key: key);
 
   @override
@@ -23,11 +31,19 @@ class _FormViewState extends State<FormView> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  final _nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
+        if (widget.showName) ...[
+          TextField(
+            keyboardType: TextInputType.name,
+            controller: _nameController,
+            decoration: const InputDecoration(hintText: 'enter name'),
+          )
+        ],
         if (widget.showEmail)
           TextField(
             keyboardType: TextInputType.emailAddress,
@@ -52,9 +68,24 @@ class _FormViewState extends State<FormView> {
         ],
         const SizedBox(height: 20.0),
         ElevatedButton(
-          child: const Text('Login'),
-          onPressed: () => widget.onSubmit(_emailController.text, password: _passwordController.text, confirmPassword: _confirmPasswordController.text),
-        )
+          child: Text(widget.buttonLabel),
+          onPressed: () async {
+            await widget.onSubmit(
+              _emailController.text,
+              password: _passwordController.text,
+              confirmPassword: _confirmPasswordController.text,
+              name: _nameController.text,
+            );
+            _passwordController.clear();
+            _confirmPasswordController.clear();
+            _nameController.clear();
+            _emailController.clear();
+          },
+        ),
+        if (widget.children != null) ...[
+          const SizedBox(height: 10.0),
+          ...widget.children!,
+        ]
       ],
     );
   }

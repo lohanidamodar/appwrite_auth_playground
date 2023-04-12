@@ -3,37 +3,36 @@ import 'package:appwrite_auth_playground/form_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginPageMagic extends StatefulWidget {
+class Register extends StatelessWidget {
   final Account account;
 
-  const LoginPageMagic({super.key, required this.account});
-  @override
-  State<LoginPageMagic> createState() => _LoginPageMagicState();
-}
-
-class _LoginPageMagicState extends State<LoginPageMagic> {
+  const Register({super.key, required this.account});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Register'),
       ),
       body: FormView(
-        buttonLabel: "Magic Login",
+        buttonLabel: "Register",
+        showEmail: true,
+        showPassword: true,
+        showName: true,
         onSubmit: (email, {password, confirmPassword, name}) async {
-          await widget.account.createMagicURLSession(
+          await account.create(
             userId: ID.unique(),
             email: email,
+            password: password!,
+            name: name,
           );
-          print('email sent');
           return true;
         },
         children: [
           TextButton(
               onPressed: () {
-                context.go('/register');
+                context.go('/login');
               },
-              child: Text("Register"))
+              child: Text("Already registered? Login"))
         ],
       ),
     );

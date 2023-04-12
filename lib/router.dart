@@ -1,5 +1,6 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite_auth_playground/recover.dart';
+import 'package:appwrite_auth_playground/register.dart';
 import 'package:go_router/go_router.dart';
 
 import 'confirm_login.dart';
@@ -7,16 +8,11 @@ import 'forgot_password.dart';
 import 'home.dart';
 import 'login.dart';
 
-final client = Client(
-        endPoint:
-            'https://8080-appwrite-appwrite-kd0bv2jqtjq.ws-us93.gitpod.io/v1')
+final client = Client(endPoint: 'http://dlauthplay.appwrite.org/v1')
     .setProject('authplayground');
 final account = Account(client);
 
-final router = GoRouter(
-  debugLogDiagnostics: true,
-  
-  routes: [
+final router = GoRouter(debugLogDiagnostics: true, routes: [
   GoRoute(
     path: '/',
     builder: (context, state) {
@@ -48,6 +44,12 @@ final router = GoRouter(
         path: 'login',
         builder: (context, state) {
           return LoginPageMagic(account: account);
+        },
+      ),
+      GoRoute(
+        path: 'register',
+        builder: (context, state) {
+          return Register(account: account);
         },
       ),
       GoRoute(
