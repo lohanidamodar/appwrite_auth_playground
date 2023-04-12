@@ -19,9 +19,21 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ListView(children: [
         ElevatedButton(
-          child: const Text('Magic URL Login'),
+          child: const Text('Login'),
           onPressed: () {
             context.go('/login');
+          },
+        ),
+        ElevatedButton(
+          child: const Text('Verify Email'),
+          onPressed: () {
+            context.go('/send-verification');
+          },
+        ),
+        ElevatedButton(
+          child: const Text('Magic URL Login'),
+          onPressed: () {
+            context.go('/login-magic');
           },
         ),
         ElevatedButton(

@@ -3,28 +3,28 @@ import 'package:appwrite_auth_playground/form_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginPage extends StatefulWidget {
+class EmailVerification extends StatefulWidget {
   final Account account;
 
-  const LoginPage({super.key, required this.account});
+  const EmailVerification({super.key, required this.account});
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<EmailVerification> createState() => _EmailVerificationState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _EmailVerificationState extends State<EmailVerification> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Verify Email'),
       ),
       body: FormView(
-        buttonLabel: "Login",
-        showPassword: true,
+        buttonLabel: "Send Email",
         onSubmit: (email, {password, confirmPassword, name}) async {
-          await widget.account
-              .createEmailSession(email: email, password: password!);
-          print("login success ");
+          await widget.account.createVerification(
+            url: 'appwrite-callback-auth-authplayground://popupbits.com/verify',
+          );
+          print('email sent');
           return true;
         },
         children: [
