@@ -24,6 +24,8 @@ class _LoginPageMagicState extends State<LoginPageMagic> {
           await widget.account.createMagicURLSession(
             userId: ID.unique(),
             email: email,
+            url:
+                'appwrite-callback-auth-authplayground://popupbits.com/magic-url',
           );
           print('email sent');
           return true;
